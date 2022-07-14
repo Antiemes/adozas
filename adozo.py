@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def kata(bevetel):
     if bevetel <= 12_000_000:
-        return 50000
+        return 50000 * 12
     else:
         return 0
 
