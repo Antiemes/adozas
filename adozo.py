@@ -6,6 +6,13 @@ import matplotlib.pyplot as plt
 # https://optitax.hu/adooptimalizalas/2022-es-minimalber-es-garantalt-berminimum
 # https://konyvelescentrum.hu/adok-es-jarulekok-kozterhek/egyeni-vallalkozo-adozasanak-osszehasonlitasa-kata-versus-szja/  <- 2021, már nem teljesen aktuális!
 
+def kata(bevetel):
+    if bevetel <= 12_000_000:
+        return 50000
+    else:
+        return 0
+
+
 def szjaado(bevetel):
     egyebkoltseg = 0
     ugyvezeto_brutto = 12*260000 # berminimum
@@ -42,18 +49,22 @@ def atalany(bevetel):
 cx = []
 cy_szja = []
 cy_atalany = []
+cy_kata = []
 
 for x in range(1,1000):
     bevetel = 1 + 26*1e6*(x/1000)
     cx.append(bevetel/1e6)
     cy_szja.append(szjaado(bevetel)/bevetel*100)
     cy_atalany.append(  atalany(bevetel)/bevetel * 100 )
+    cy_kata.append(  kata(bevetel)/bevetel * 100 )
+
 
 
 plt.plot(cx, cy_szja)
 plt.plot(cx, cy_atalany)
+plt.plot(cx, cy_kata)
 plt.ylim([0, 100])
 plt.xlabel('éves bevetel (millio HUF)')
 plt.ylabel('ado%')
-plt.title('TAO+SZJA vs átalány')
+plt.title('TAO+SZJA vs átalány vs. régi KATA')
 plt.show()
